@@ -3,4 +3,6 @@ project(LearnC)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(LearnC project1.cpp)
+add_executable(LearnC project1/main.cpp
+        project2/main.cpp)
+
