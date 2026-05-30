@@ -3,6 +3,9 @@
 //
 
 #include <iostream>
+#include "mathlib/basic.h"
+#include "mathlib/stats.h"
+#include "mathlib/trig.h"
 
 
 using namespace std;
@@ -54,6 +57,52 @@ void print_menu_trig( char & string) {
     }
 };
 
+
+void askForDouble(double & operator1, const char * str) {
+    cout << "Input a value for " << str << ":\n";
+    double response ;
+
+    bool valid = false;
+    do {
+        cin >> response;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid input, try again\n";
+        } else {
+            valid = true;
+            operator1 = response;
+        }
+    } while (!valid);
+};
+
+int askForInt(const char * str) {
+    cout << "Input a value for " << str << ":\n";
+    int response ;
+
+    bool valid = false;
+    do {
+        cin >> response;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid input, try again\n";
+        } else {
+            valid = true;
+        }
+    } while (!valid);
+    return response;
+};
+
+void askForDoubles(const int n, const char * str, double * values) {
+    cout << "Input a value for " << str << ":\n";
+
+    for (int i = 0; i < n; ++i) {
+        string title = "Value " + std::to_string(i+1);
+        askForDouble(values[i], title.c_str());
+    }
+};
+
 int main() {
 
 
@@ -68,11 +117,22 @@ int main() {
         //basic operations
         if (input == '1') {
             print_menu_basic(operation);
+
+            double operator1;
+            double operator2;
+            askForDouble(operator1, "Operator 1");
+            askForDouble(operator2, "Operator 2");
+
             return 1;
         }
         // statistics
         else if (input == '2') {
             print_menu_stats(operation);
+
+            int n = askForInt( "number of values for the operation");
+            double values[n];
+            askForDoubles(n, "values for statistic calculation", values);
+
             return 2;
         }
         //trigonometry

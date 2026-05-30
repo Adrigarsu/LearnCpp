@@ -6,7 +6,7 @@
 #define LEARNC_BASIC_H
 
 
-class basic {
+namespace  mathlib::basic {
     double sum(double op1, double op2);
     double sub(double op1, double op2);
     double div(double op1, double op2);
